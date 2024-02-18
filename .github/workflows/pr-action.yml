@@ -17,5 +17,6 @@ jobs:
     steps:
       - name: Print env
         run: |
+          echo trigger time: $(date)
           echo "PULL_REQUEST_NUM_OFFICIAL: $PULL_REQUEST_NUM_OFFICIAL"
           # echo "PULL_REQUEST_NUM_WTF: $PULL_REQUEST_NUM_WTF"
