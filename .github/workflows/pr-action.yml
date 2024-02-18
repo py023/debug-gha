@@ -1,0 +1,21 @@
+# RTFM before doing anything: https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request
+name: Auto trigger PR action
+
+on:
+  pull_request_review_comment:
+    types: [created, edited]
+  pull_request_target:
+    types: [opened, synchronize]
+
+env:
+  PULL_REQUEST_NUM_OFFICIAL: ${{ github.event.pull_request.number }}
+  # PULL_REQUEST_NUM_WTF: $(echo "${{ github.event.issue.pull_request.url }}" | awk -F/ '{print $NF}')
+
+jobs:
+  print_env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print env
+        run: |
+          echo "PULL_REQUEST_NUM_OFFICIAL: $PULL_REQUEST_NUM_OFFICIAL"
+          # echo "PULL_REQUEST_NUM_WTF: $PULL_REQUEST_NUM_WTF"
