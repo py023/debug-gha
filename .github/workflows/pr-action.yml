@@ -2,6 +2,8 @@
 name: Auto trigger PR action
 
 on:
+  issue_comment:
+    types: [created, edited]
   pull_request_review_comment:
     types: [created, edited]
   pull_request_target:
@@ -9,7 +11,7 @@ on:
 
 env:
   PULL_REQUEST_NUM_OFFICIAL: ${{ github.event.pull_request.number }}
-  # PULL_REQUEST_NUM_WTF: $(echo "${{ github.event.issue.pull_request.url }}" | awk -F/ '{print $NF}')
+  PULL_REQUEST_NUM_WTF: $(echo "${{ github.event.issue.pull_request.url }}" | awk -F/ '{print $NF}')
 
 jobs:
   print_env:
@@ -19,4 +21,4 @@ jobs:
         run: |
           echo trigger time: $(date)
           echo "PULL_REQUEST_NUM_OFFICIAL: $PULL_REQUEST_NUM_OFFICIAL"
-          # echo "PULL_REQUEST_NUM_WTF: $PULL_REQUEST_NUM_WTF"
+          echo "PULL_REQUEST_NUM_WTF: $PULL_REQUEST_NUM_WTF"
